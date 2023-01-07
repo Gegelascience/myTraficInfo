@@ -6,14 +6,14 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 //import type {} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  useColorScheme,
   View,
-  Text
+  Text,
+  Button
 } from 'react-native';
 
 import InfoTrafic from './components/InfoTrafic';
@@ -21,8 +21,9 @@ import InfoTrafic from './components/InfoTrafic';
 import {API_KEY} from "@env"
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  
   console.log(API_KEY)
+  const [lineSeclected, setLineSelected] = useState("ligne R")
 
 
   return (
@@ -36,11 +37,23 @@ const App = () => {
       >Info Trafic</Text>
       <ScrollView
         style={{}}>
-        <View
-          >
-          <InfoTrafic line="ligne R" api_key={API_KEY}></InfoTrafic>
-          <InfoTrafic line="ligne 14" api_key={API_KEY}></InfoTrafic>
-          <InfoTrafic line="ligne 3" api_key={API_KEY}></InfoTrafic>
+        <View>
+          <Button color="#fd6c9e" title="ligne R" onPress={() => {
+            setLineSelected("ligne R")
+          }}/>
+          <Button color="#841584" title="ligne 14" onPress={() => {
+            setLineSelected("ligne 14")
+          }}/>
+          <Button title="ligne 3" onPress={() => {
+            setLineSelected("ligne 3")
+          }}/>
+          <Button color="red" title="ligne A" onPress={() => {
+            setLineSelected("ligne A")
+          }}/>
+          <Button color="yellow" title="ligne 1" onPress={() => {
+            setLineSelected("ligne 1")
+          }}/>
+          <InfoTrafic line={lineSeclected} api_key={API_KEY}></InfoTrafic>
         </View>
       </ScrollView>
     </SafeAreaView>
